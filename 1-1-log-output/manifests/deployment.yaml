@@ -12,6 +12,17 @@ spec:
       labels:
         app: log-output
     spec:
+      volumes:
+        - name: shared-log
+          emptyDir: {}
       containers:
-        - name: log-output
-          image: imbekrishna/log-output:1.7
+        - name: log-output-generator
+          image: imbekrishna/log-output-generator:1.10
+          volumeMounts:
+            - name: shared-log
+              mountPath: /app/logs
+        - name: log-output-reader
+          image: imbekrishna/log-output-reader:1.10
+          volumeMounts:
+            - name: shared-log
+              mountPath: /app/logs
