@@ -13,4 +13,4 @@ spec:
     spec:
       containers:
       - name: the-project
-        image: imbekrishna/the-project:1.2
+        image: imbekrishna/the-project:1.5
