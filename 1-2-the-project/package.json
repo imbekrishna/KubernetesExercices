@@ -1,0 +1,14 @@
+{
+  "name": "1-2-the-project",
+  "scripts": {
+    "dev": "bun run --hot src/index.ts",
+    "start": "bun build/index.js",
+    "build": "bun build ./src/index.ts --outdir ./build"
+  },
+  "dependencies": {
+    "hono": "^4.13.1"
+  },
+  "devDependencies": {
+    "@types/bun": "latest"
+  }
+}
