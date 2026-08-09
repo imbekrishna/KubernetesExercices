@@ -1,13 +1,28 @@
-const {randomUUID} = require('crypto');
+const { randomUUID } = require('node:crypto');
+const http = require('node:http');
 
 const randomString = randomUUID();
 
-function print(){
+function createOutput() {
 	const date = new Date();
-	console.log(`${date.toISOString()}: ${randomString}`);
+	const response = `${date.toISOString()}: ${randomString}`;
+	return response
 }
 
-const interval = setInterval(print, 5000);
+const interval = setInterval(() => console.log(createOutput()), 5000);
 
-process.on('SIGTERM', () => clearInterval(interval));
-process.on('SIGINT', () => clearInterval(interval));
+function handleRequest(req, res) {
+	res.writeHead(200);
+	res.end(createOutput());
+}
+
+const server = http.createServer(handleRequest);
+server.listen(4000)
+
+function cleanUp() {
+	clearInterval(interval);
+	server.close()
+}
+
+process.on('SIGTERM', cleanUp);
+process.on('SIGINT', cleanUp);
