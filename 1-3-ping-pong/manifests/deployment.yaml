@@ -12,6 +12,13 @@ spec:
       labels:
         app: ping-pong
     spec:
+      volumes:
+        - name: shared-log
+          persistentVolumeClaim:
+            claimName: log-ping-pvc
       containers:
         - name: ping-pong
-          image: imbekrishna/ping-pong:1.9
+          image: imbekrishna/ping-pong:1.11
+          volumeMounts:
+            - name: shared-log
+              mountPath: /app/logs
