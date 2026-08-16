@@ -3,12 +3,6 @@ const { randomUUID } = require('node:crypto');
 const path = require('node:path');
 const http = require('node:http')
 
-// const directory = path.join('/', 'usr', 'src', 'app', 'logs')
-const directory = path.join('/', 'app', 'logs')
-// const filePath = path.join(directory, 'log.txt')
-const counterPath = path.join(directory, 'counter.txt')
-
-
 function createOutput() {
     const randomString = randomUUID();
     const date = new Date();
@@ -16,18 +10,15 @@ function createOutput() {
     return response
 }
 
-function readLog(readFilePath) {
-    try {
-        return fs.readFileSync(readFilePath, 'utf-8');
-    } catch (error) {
-        return '0'
-    }
+function getPing() {
+    const res = fetch('http://ping-pong-svc:2349/pings').then(res => res.text()).catch(console.error)
+    return res;
 }
 
-function handleRequest(req, res) {
+
+async function handleRequest(req, res) {
     res.writeHead(200);
-    // res.end(readlog(filePath));
-    res.end(`${createOutput()}\nPing / Pongs: ${readLog(counterPath)}`);
+    res.end(`${createOutput()}\nPing / Pongs: ${await getPing()}`);
 }
 
 const server = http.createServer(handleRequest);

@@ -12,19 +12,8 @@ spec:
       labels:
         app: log-output
     spec:
-      volumes:
-        - name: shared-log
-          persistentVolumeClaim:
-            claimName: log-ping-pvc
       containers:
         - name: log-output-generator
           image: imbekrishna/log-output-generator:1.10
-          volumeMounts:
-            - name: shared-log
-              mountPath: /app/logs
         - name: log-output-reader
-          image: imbekrishna/log-output-reader:1.11
-          imagePullPolicy: Always
-          volumeMounts:
-            - name: shared-log
-              mountPath: /app/logs
+          image: imbekrishna/log-output-reader:2.1

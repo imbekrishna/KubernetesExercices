@@ -1,30 +1,31 @@
 const http = require('node:http');
-const fs = require('node:fs');
 const path = require('node:path');
-const os = require('node:os');
-
-const directory = path.join('/', 'app', 'logs')
-const filePath = path.join(directory, 'counter.txt')
-
-function writeLog(output) {
-	if (!fs.existsSync(filePath)) {
-		fs.mkdirSync(path.dirname(filePath), { recursive: true });
-		fs.writeFileSync(filePath, '', 'utf-8');
-	}
-	fs.writeFileSync(filePath, output + os.EOL, 'utf-8');
-}
+const url = require('node:url');
 
 let count = 0;
 
-function handleRequest(req, res) {
-	count += 1;
-	console.log(count);
-	res.writeHead(200);
-	res.end(`pong ${count}`);
-	writeLog(count);
-}
+const ping = (req, res) => {
+    count += 1;
+    res.writeHead(200);
+    res.end(`pong ${count}`);
+};
 
-const server = http.createServer(handleRequest);
+const routes = {
+    '/': ping,
+    '/pingpong': ping,
+    '/pings': (req, res) => res.end(String(count))
+};
+
+
+const server = http.createServer((req, res) => {
+  const pathname = url.parse(req.url).pathname;
+  if (routes[pathname]) {
+    routes[pathname](req, res);
+  } else {
+    res.writeHead(404);
+    res.end('Not Found');
+  }
+});
 server.listen(5001)
 
 function cleanUp() {
