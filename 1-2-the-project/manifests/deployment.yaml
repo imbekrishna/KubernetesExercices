@@ -11,6 +11,13 @@ spec:
       labels:
         app: the-project
     spec:
+      volumes:
+        - name: image-persist
+          persistentVolumeClaim:
+            claimName: log-ping-pvc
       containers:
-      - name: the-project
-        image: imbekrishna/the-project:1.5
+        - name: the-project
+          image: imbekrishna/the-project:1.12
+          volumeMounts:
+            - name: image-persist
+              mountPath: /app/data

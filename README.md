@@ -14,3 +14,4 @@
 - [1.9](https://github.com/imbekrishna/KubernetesExercices/tree/main/1-3-ping-pong)
 - [1.10](https://github.com/imbekrishna/KubernetesExercices/tree/main/1-1-log-output)
 - [1.11](https://github.com/imbekrishna/KubernetesExercices/tree/main/1-1-log-output)
+- [1.12](https://github.com/imbekrishna/KubernetesExercices/tree/main/1-2-the-project)

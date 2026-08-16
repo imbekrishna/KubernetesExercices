@@ -7,4 +7,4 @@ COPY . /app
 RUN bun install --frozen-lockfile
 RUN bun run build
 
-CMD ["bun", "build/index.js"]
+CMD ["bun", "run", "server.ts"]
