@@ -17,7 +17,7 @@ spec:
             claimName: log-ping-pvc
       containers:
         - name: the-project
-          image: imbekrishna/the-project:1.12
+          image: imbekrishna/the-project:1.13
           volumeMounts:
             - name: image-persist
               mountPath: /app/data

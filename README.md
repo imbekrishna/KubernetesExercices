@@ -15,3 +15,4 @@
 - [1.10](https://github.com/imbekrishna/KubernetesExercices/tree/main/1-1-log-output)
 - [1.11](https://github.com/imbekrishna/KubernetesExercices/tree/main/1-1-log-output)
 - [1.12](https://github.com/imbekrishna/KubernetesExercices/tree/main/1-2-the-project)
+- [1.13](https://github.com/imbekrishna/KubernetesExercices/tree/main/1-2-the-project)
